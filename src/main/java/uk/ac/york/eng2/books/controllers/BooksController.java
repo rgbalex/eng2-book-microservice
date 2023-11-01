@@ -87,7 +87,6 @@ public class BooksController {
 
         foundBook.addReader(foundUser);
         bookRepository.update(foundBook);
-        userRepository.update(foundUser);
 
         return HttpResponse.ok();
     }
@@ -103,6 +102,26 @@ public class BooksController {
         
         bookRepository.delete(foundBook);
         
+        return HttpResponse.ok();
+    }
+
+    @Transactional
+    @Delete("/{bookId}/readers/{readerId}")
+    public HttpResponse<Void> deleteBookReader(long bookId, long readerId)
+    {
+        Book foundBook = bookRepository.findById(bookId).orElse(null);
+        if (foundBook == null) {
+            return HttpResponse.notFound();
+        }
+
+        User foundUser = userRepository.findById(readerId).orElse(null);
+        if (foundUser == null) {
+            return HttpResponse.notFound();
+        }
+
+        foundBook.removeReader(foundUser);
+        bookRepository.update(foundBook);
+
         return HttpResponse.ok();
     }
 }

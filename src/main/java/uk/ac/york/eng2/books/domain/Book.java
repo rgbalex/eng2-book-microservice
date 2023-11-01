@@ -71,8 +71,12 @@ public class Book {
         this.readers = readers;
     }
 
-    public void addReader(User user) {
-        readers.add(user);
+    public void addReader(User foundUser) {
+        readers.add(foundUser);
+    }
+
+    public void removeReader(User foundUser) {
+        readers.remove(foundUser);
     }
     
 }
