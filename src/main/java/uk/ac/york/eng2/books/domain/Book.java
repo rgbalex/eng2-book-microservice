@@ -65,5 +65,14 @@ public class Book {
     public Set<User> getReaders() {
         return readers;
     }
+
+    // Turns out this is also required for Micronaut not to throw a fit.
+    public void setReaders(Set<User> readers) {
+        this.readers = readers;
+    }
+
+    public void addReader(User user) {
+        readers.add(user);
+    }
     
 }

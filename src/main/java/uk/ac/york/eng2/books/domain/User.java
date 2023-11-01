@@ -27,6 +27,14 @@ public class User {
     @ManyToMany(mappedBy = "readers")
     private Set<Book> readBooks;
 
+    public Set<Book> getReadBooks() {
+        return readBooks;
+    }
+
+    public void setReadBooks(Set<Book> readBooks) {
+        this.readBooks = readBooks;
+    }
+
     public User(String name, Integer age) {
         this.name = name;
         this.age = age;
