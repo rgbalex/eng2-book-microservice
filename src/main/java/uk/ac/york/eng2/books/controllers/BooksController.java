@@ -9,11 +9,11 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
+import uk.ac.york.eng2.books.domain.User;
 import uk.ac.york.eng2.books.dto.BookDTO;
 import uk.ac.york.eng2.books.repositories.BooksRepository;
 
 import java.net.URI;
-
 import javax.transaction.Transactional;
 
 @Controller("/books")
@@ -24,6 +24,16 @@ public class BooksController {
     @Get("/")
     public Iterable<Book> list()
         { return repository.findAll(); }
+
+    @Get("/{id}/readers")
+    public Iterable<User> listReaders(long id)
+    { 
+        Book book = repository.findById(id).orElse(null);
+        if (book == null) 
+            { return null; }
+            
+        return book.getReaders();
+    }
 
     @Post("/")
     public HttpResponse<Void> add(@Body BookDTO bookDetails) {
