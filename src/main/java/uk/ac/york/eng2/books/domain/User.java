@@ -14,26 +14,25 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Entity
 @Serdeable
-public class Book {
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private String title;
+    private String name;
     @Column(nullable = false)
-    private Integer year;
+    private Integer age;
     @JsonIgnore
-    @ManyToMany
-    private Set<User> readers;
+    @ManyToMany(mappedBy = "readers")
+    private Set<Book> readBooks;
 
-
-    public Book(String title, Integer year) {
-        this.title = title;
-        this.year = year;
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
     }
 
-    public Book() {
+    public User() {
 
     }
 
@@ -45,25 +44,19 @@ public class Book {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setAge(Integer age) {
+        this.age = age;
     }
-
-    // Required for ManyToMany to work
-    public Set<User> getReaders() {
-        return readers;
-    }
-    
 }

@@ -1,14 +1,12 @@
 package uk.ac.york.eng2.books.controllers;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
-import io.micronaut.transaction.annotation.ReadOnly;
 import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
 import uk.ac.york.eng2.books.dto.BookDTO;
