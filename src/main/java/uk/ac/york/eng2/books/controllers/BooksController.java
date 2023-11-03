@@ -13,6 +13,7 @@ import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
 import uk.ac.york.eng2.books.domain.User;
 import uk.ac.york.eng2.books.dto.BookDTO;
+import uk.ac.york.eng2.books.events.BooksProducer;
 import uk.ac.york.eng2.books.repositories.BooksRepository;
 import uk.ac.york.eng2.books.repositories.UsersRepository;
 
@@ -27,6 +28,9 @@ public class BooksController {
 
     @Inject
     public UsersRepository userRepository;
+
+    @Inject
+    public BooksProducer booksProducer;
 
     @Get("/")
     public Iterable<Book> list()
@@ -85,8 +89,11 @@ public class BooksController {
             return HttpResponse.notFound();
         }
 
-        foundBook.addReader(foundUser);
-        bookRepository.update(foundBook);
+        if (foundBook.addReader(foundUser))
+        {   
+            bookRepository.update(foundBook);
+            booksProducer.readBook(readerId, foundBook);
+        }
 
         return HttpResponse.ok();
     }

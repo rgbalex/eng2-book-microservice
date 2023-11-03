@@ -71,8 +71,8 @@ public class Book {
         this.readers = readers;
     }
 
-    public void addReader(User foundUser) {
-        readers.add(foundUser);
+    public boolean addReader(User foundUser) {
+        return readers.add(foundUser);
     }
 
     public void removeReader(User foundUser) {
