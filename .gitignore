@@ -13,6 +13,7 @@ out/
 .settings
 .classpath
 .factorypath
+bin/
 
 # Compiled class file
 *.class
